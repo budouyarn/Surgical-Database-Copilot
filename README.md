@@ -1,5 +1,5 @@
 Surgical Database + Co-pilot
-A vibecoding project for a web app for operating theatre staff to manage surgeon procedure preference cards and get AI-powered assistance via a built-in co-pilot.
+A vibecoding project App for operating theatre staff to manage surgeon procedure preference cards and get AI-powered assistance via a built-in co-pilot.
 
 ## Getting Started
 
