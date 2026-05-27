@@ -2,12 +2,13 @@
 
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { Stethoscope, Users, ClipboardList, Bot, LogOut } from 'lucide-react';
+import { Stethoscope, Users, ClipboardList, Bot, LogOut, FlaskConical } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { createClient } from '@/lib/supabase/client';
 
 const links = [
   { href: '/surgeons', label: 'Surgeons', icon: Users },
+  { href: '/procedures', label: 'Procedures', icon: FlaskConical },
   { href: '/cases', label: 'Cases', icon: ClipboardList },
   { href: '/copilot', label: 'Copilot', icon: Bot },
 ];
