@@ -114,7 +114,9 @@ MIT
 ---
 ## Login 
 <img width="1829" height="1443" alt="image" src="https://github.com/user-attachments/assets/db1ce1d6-d053-428b-aad1-3cde660ac568" />
+
 - Authentication and Sign up using Supabase Auth, and also allows users to reset their passwords if they forget.
+
 
 
 ## Adding of Surgeons Preferences and Data
@@ -127,7 +129,7 @@ MIT
 
 
 
---
+---
 
 
 
