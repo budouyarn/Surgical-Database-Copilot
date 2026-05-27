@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 import { Plus, Search, ChevronRight } from 'lucide-react';
 import { Procedure } from '@/types';
 import { fetchList } from '@/lib/fetchList';
@@ -68,13 +69,13 @@ export default function ProceduresPage() {
               <h2 className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">{specialty}</h2>
               <div className="bg-white rounded-xl border border-slate-200 divide-y divide-slate-100">
                 {procs.map(p => (
-                  <div key={p.id} className="flex items-center justify-between px-5 py-4">
+                  <Link key={p.id} href={`/procedures/${p.id}`} className="flex items-center justify-between px-5 py-4 hover:bg-slate-50 transition-colors">
                     <div>
                       <p className="font-medium text-slate-800">{p.name}</p>
                       {p.description && <p className="text-sm text-slate-500 mt-0.5">{p.description}</p>}
                     </div>
-                    <ChevronRight className="w-4 h-4 text-slate-300" />
-                  </div>
+                    <ChevronRight className="w-4 h-4 text-slate-400" />
+                  </Link>
                 ))}
               </div>
             </div>

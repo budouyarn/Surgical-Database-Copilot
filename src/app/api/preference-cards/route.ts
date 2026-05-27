@@ -7,6 +7,7 @@ export async function GET(req: NextRequest) {
   const supabase = await createClient();
   const { searchParams } = new URL(req.url);
   const surgeonId = searchParams.get('surgeon_id');
+  const procedureId = searchParams.get('procedure_id');
 
   let query = supabase
     .from('preference_cards')
@@ -14,6 +15,7 @@ export async function GET(req: NextRequest) {
     .order('updated_at', { ascending: false });
 
   if (surgeonId) query = query.eq('surgeon_id', surgeonId);
+  if (procedureId) query = query.eq('procedure_id', procedureId);
 
   const { data, error } = await query;
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
