@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { Stethoscope } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
 
@@ -81,6 +82,14 @@ export default function LoginPage() {
 
           {error && <p className="text-sm text-red-600">{error}</p>}
           {message && <p className="text-sm text-green-600">{message}</p>}
+
+          {mode === 'signin' && (
+            <div className="text-right">
+              <Link href="/forgot-password" className="text-xs text-blue-600 hover:underline">
+                Forgot password?
+              </Link>
+            </div>
+          )}
 
           <button
             type="submit"

@@ -34,12 +34,13 @@ export async function proxy(request: NextRequest) {
     if (pathname.startsWith('/api/')) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
-    if (pathname !== '/login') {
+    const publicPaths = ['/login', '/forgot-password', '/reset-password'];
+    if (!publicPaths.includes(pathname)) {
       const url = request.nextUrl.clone();
       url.pathname = '/login';
       return NextResponse.redirect(url);
     }
-  } else if (pathname === '/login') {
+  } else if (pathname === '/login' || pathname === '/forgot-password') {
     const url = request.nextUrl.clone();
     url.pathname = '/';
     return NextResponse.redirect(url);
