@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Send, Bot, User, Loader2, Lightbulb } from 'lucide-react';
 import { CopilotMessage, Surgeon, Procedure } from '@/types';
@@ -13,7 +13,7 @@ const SUGGESTIONS = [
   'Summarize the preference card for Dr. [Name]',
 ];
 
-export default function CopilotPage() {
+function CopilotContent() {
   const searchParams = useSearchParams();
   const surgeonParam = searchParams.get('surgeon');
 
@@ -181,5 +181,13 @@ export default function CopilotPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function CopilotPage() {
+  return (
+    <Suspense fallback={<div className="text-center py-20 text-slate-400">Loading…</div>}>
+      <CopilotContent />
+    </Suspense>
   );
 }
