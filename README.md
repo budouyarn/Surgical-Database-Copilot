@@ -113,7 +113,16 @@ MIT
 
 ---
 ## Login 
-file:///Users/sherinelim/Desktop/Screenshot%202026-05-27%20at%205.20.28%E2%80%AFPM.png
+<img width="1829" height="1443" alt="image" src="https://github.com/user-attachments/assets/db1ce1d6-d053-428b-aad1-3cde660ac568" />
+-Authentication and Sign up using Supabase Auth, and also allows users to reset their passwords if they forget.
+
+
+## Adding of Surgeons Preferences and Data
+<img width="2880" height="1634" alt="image" src="https://github.com/user-attachments/assets/54f2639e-6cc5-447c-9843-8dfb2be8b555" />
+-Allows supported files such as docx,pdf,image,xlsx to parse over and fill in details.
+
+
+
 
 
 
