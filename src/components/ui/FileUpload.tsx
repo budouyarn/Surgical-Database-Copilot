@@ -28,11 +28,13 @@ export default function FileUpload({ extractType, onExtracted }: Props) {
 
     try {
       const res = await fetch('/api/parse-file', { method: 'POST', body: form });
-      const data = await res.json();
-      if (!res.ok) { setError(data.error || 'Failed to parse file'); return; }
+      const text = await res.text();
+      let data: Record<string, unknown>;
+      try { data = JSON.parse(text); } catch { setError(`Server error: ${text.slice(0, 200)}`); return; }
+      if (!res.ok) { setError((data.error as string) || 'Failed to parse file'); return; }
       onExtracted(data);
-    } catch {
-      setError('Failed to upload file');
+    } catch (e) {
+      setError(`Failed to upload file: ${e instanceof Error ? e.message : String(e)}`);
     } finally {
       setLoading(false);
     }
