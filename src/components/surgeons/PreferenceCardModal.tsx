@@ -5,6 +5,7 @@ import { Plus, Trash2 } from 'lucide-react';
 import Modal, { inputCls } from '@/components/ui/Modal';
 import { useFormSubmit } from '@/lib/useFormSubmit';
 import { PreferenceCard, Procedure } from '@/types';
+import FileUpload from '@/components/ui/FileUpload';
 
 interface Props {
   surgeonId: string;
@@ -69,9 +70,24 @@ export default function PreferenceCardModal({ surgeonId, card, procedures, onClo
     submit({ ...form, surgeon_id: surgeonId, ...(card ? { id: card.id } : {}) });
   }
 
+  function handleExtracted(data: Record<string, unknown>) {
+    setForm(f => ({
+      ...f,
+      positioning: (data.positioning as string) || f.positioning,
+      draping: (data.draping as string) || f.draping,
+      instruments: (data.instruments as string[])?.length ? data.instruments as string[] : f.instruments,
+      sutures: (data.sutures as string[])?.length ? data.sutures as string[] : f.sutures,
+      special_equipment: (data.special_equipment as string[])?.length ? data.special_equipment as string[] : f.special_equipment,
+      steps: (data.steps as string[])?.length ? data.steps as string[] : f.steps,
+      notes: (data.notes as string) || f.notes,
+    }));
+  }
+
   return (
     <Modal title={`${card ? 'Edit' : 'Add'} Preference Card`} onClose={onClose} onSubmit={handleSubmit}
       saving={saving} saveLabel="Save Card" error={error} wide scrollable>
+      {!card && <FileUpload extractType="preference_card" onExtracted={handleExtracted} />}
+      {!card && <hr className="border-slate-100" />}
       <div>
         <label className="block text-xs font-medium text-slate-600 mb-1">Procedure</label>
         <select required value={form.procedure_id} onChange={e => setForm(f => ({ ...f, procedure_id: e.target.value }))}
