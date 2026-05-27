@@ -41,6 +41,13 @@ export async function POST(req: NextRequest) {
     } else if (name.endsWith('.docx')) {
       const mammoth = await import('mammoth');
       text = (await mammoth.extractRawText({ buffer: Buffer.from(await file.arrayBuffer()) })).value;
+    } else if (name.endsWith('.xlsx')) {
+      const XLSX = await import('xlsx');
+      const workbook = XLSX.read(Buffer.from(await file.arrayBuffer()), { type: 'buffer' });
+      text = workbook.SheetNames.map(sheetName => {
+        const sheet = workbook.Sheets[sheetName];
+        return `Sheet: ${sheetName}\n${XLSX.utils.sheet_to_csv(sheet)}`;
+      }).join('\n\n');
     } else {
       return NextResponse.json({ error: 'Unsupported file type' }, { status: 400 });
     }

@@ -8,7 +8,7 @@ interface Props {
   onExtracted: (data: Record<string, unknown>) => void;
 }
 
-const ACCEPTED = '.pdf,.docx,.csv,.txt,.png,.jpg,.jpeg,.webp';
+const ACCEPTED = '.pdf,.docx,.xlsx,.csv,.txt,.png,.jpg,.jpeg,.webp';
 
 export default function FileUpload({ extractType, onExtracted }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -78,7 +78,7 @@ export default function FileUpload({ extractType, onExtracted }: Props) {
             <p className="text-xs text-slate-500">
               Drop a file or <span className="text-blue-600 font-medium">browse</span>
             </p>
-            <p className="text-xs text-slate-400">PDF, DOCX, CSV, or image</p>
+            <p className="text-xs text-slate-400">PDF, DOCX, XLSX, CSV, or image</p>
           </>
         )}
       </div>
