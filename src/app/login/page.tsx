@@ -20,17 +20,22 @@ export default function LoginPage() {
     setError('');
     setMessage('');
 
-    const supabase = createClient();
+    try {
+      const supabase = createClient();
 
-    if (mode === 'signin') {
-      const { error } = await supabase.auth.signInWithPassword({ email, password });
-      if (error) { setError(error.message); setLoading(false); return; }
-      router.push('/');
-      router.refresh();
-    } else {
-      const { error } = await supabase.auth.signUp({ email, password });
-      if (error) { setError(error.message); setLoading(false); return; }
-      setMessage('Check your email to confirm your account, then sign in.');
+      if (mode === 'signin') {
+        const { error } = await supabase.auth.signInWithPassword({ email, password });
+        if (error) { setError(error.message); setLoading(false); return; }
+        router.push('/');
+        router.refresh();
+      } else {
+        const { error } = await supabase.auth.signUp({ email, password });
+        if (error) { setError(error.message); setLoading(false); return; }
+        setMessage('Check your email to confirm your account, then sign in.');
+        setLoading(false);
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Something went wrong. Check your configuration.');
       setLoading(false);
     }
   }

@@ -18,15 +18,23 @@ export default function Nav() {
   const [email, setEmail] = useState('');
 
   useEffect(() => {
-    createClient().auth.getUser().then(({ data }) => {
-      if (data.user?.email) setEmail(data.user.email);
-    });
+    try {
+      createClient().auth.getUser().then(({ data }) => {
+        if (data.user?.email) setEmail(data.user.email);
+      });
+    } catch {
+      // Supabase not configured yet
+    }
   }, []);
 
   if (pathname === '/login') return null;
 
   async function signOut() {
-    await createClient().auth.signOut();
+    try {
+      await createClient().auth.signOut();
+    } catch {
+      // ignore
+    }
     router.push('/login');
     router.refresh();
   }
