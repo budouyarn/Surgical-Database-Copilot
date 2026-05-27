@@ -1,4 +1,11 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Surgical Database + Co-pilot
+A web app for operating theatre staff to manage surgeon procedure preference cards and get AI-powered assistance via a built-in co-pilot.
+Features
+
+Surgeon Profiles — Store surgeon details including gown/glove sizes and specialty
+Procedure Cards — Detailed preference cards covering instruments, pharmaceuticals, positioning, supplies, surgeon preferences, surgery steps, blades/sutures, BHO, drain, and dressing
+AI Co-pilot — Powered by Claude (Anthropic), answers questions about cases, generates prep checklists, and suggests templates based on procedure type
+Add Surgeons — Expand the database with new surgeon profiles directly in the UI
 
 ## Getting Started
 
@@ -13,24 +20,60 @@ pnpm dev
 # or
 bun dev
 ```
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Open [http://localhost:3000](http://localhost:3000)  to view the prototype.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Tech Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+React + Vite
+Anthropic Claude API (claude-sonnet-4-20250514)
+Deployed via Vercel 
 
-## Learn More
+Getting Started
+Prerequisites
 
-To learn more about Next.js, take a look at the following resources:
+Node.js 18+
+An Anthropic API key
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Installation
+bashgit clone https://github.com/YOUR_USERNAME/surgical-database-copilot.git
+cd surgical-database-copilot
+npm install
+Environment Variables
+Create a .env file in the root:
+envVITE_ANTHROPIC_API_KEY=your_anthropic_api_key_here
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Note: For production, proxy API calls through a backend to avoid exposing your API key in the browser.
 
-## Deploy on Vercel
+Run Locally
+bashnpm run dev
+Open http://localhost:5173 in your browser.
+Build for Production
+bashnpm run build
+npm run preview
+Project Structure
+surgical-database-copilot/
+├── public/
+├── src/
+│   ├── App.jsx          # Main application component
+│   ├── main.jsx         # React entry point
+│   └── index.css        # Global styles
+├── .env                 # Environment variables (not committed)
+├── .gitignore
+├── index.html
+├── package.json
+└── vite.config.js
+Deployment
+See DEPLOYMENT.md for step-by-step instructions for Vercel and Netlify.
+Security Notes
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Never commit your .env file or expose your Anthropic API key publicly
+For multi-user production deployments, move API calls to a server-side backend (e.g. Express, Next.js API routes)
+Patient data should be handled in compliance with local healthcare data regulations (e.g. PDPA in Singapore)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+License
+MIT
+
+
+
