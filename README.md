@@ -23,13 +23,13 @@ Open [http://localhost:3000](http://localhost:3000)  to view the prototype.
 - **Procedure Cards** — detailed preference cards covering instruments, pharmaceuticals, positioning, supplies, surgeon preferences, surgery steps, blades/sutures, BHO, drain, and dressing
 - **AI Co-pilot** — AI Co-pilot — Powered by Claude (Anthropic), answers questions about cases, generates prep checklists, and suggests templates based on procedure type
 - **Add Surgeons** — Expand the database with new surgeon profiles directly in the UI
-- **Authentication** — email/password login, self-registration, and JWT sessions via NextAuth
+- **Authentication** — email/password login, self-registration, and JWT sessions via NextAuth(Supabase Auth)
 - **Password Reset** — secure time-limited reset links sent via Microsoft Outlook (hospital domain)
 - **Rate Limiting** — per-email and per-IP limits on reset requests via Upstash Redis
+- **GDPR/PDPA compliance**-aware design in adherence to data privacy
 
-## In Progress Features
-- **Authentication with MFA** — Had little to no permission with company's API, which needs approval formally with managers and organization.
-- **Email Setup**- For prototype version, email setup for authentication(using Supabase) will be used for sampling.
+## Limitations
+- **Authentication with Microsoft MFA per Organisation PDPA compliance** — Had little to no permission with company's API, which needs approval formally with managers and organization.
 ---
 
 ## Getting Started
@@ -55,7 +55,7 @@ The project is split into two apps:
 
 | App | Stack | Purpose |
 |---|---|---|
-| `surgical-database-copilot` | React + Vite | Frontend UI |
+| `surgical-database-copilot` | React + Vite5 | Frontend UI |
 | `surgical-db-server` | Next.js (App Router) | Backend API + auth |
 
 ---
@@ -65,9 +65,9 @@ The project is split into two apps:
 - [React 18](https://react.dev/) + [Vite 5](https://vitejs.dev/) — frontend
 - [Next.js 14](https://nextjs.org/) — backend API server
 - [NextAuth v5](https://authjs.dev/) — authentication & JWT sessions
-- [Prisma](https://www.prisma.io/) + PostgreSQL — database
-- [Anthropic Claude API](https://docs.anthropic.com/) (`claude-sonnet-4-20250514`) — AI co-pilot
-- [Nodemailer](https://nodemailer.com/) + Microsoft Outlook SMTP — password reset emails
+- [Nodemailer + Microsoft Outlook SMTP]-Password reset emails
+- [Prisma ORM + PostgreSQL] — database
+- [Anthropic Claude API](https://docs.anthropic.com/) (`claude-sonnet-4-20250514`) — AI co-pilot for case Q&A, checklist generation, and template suggestions
 - [Upstash Redis](https://upstash.com/) — rate limiting
 - [Vercel](https://vercel.com/) — deployment
 
