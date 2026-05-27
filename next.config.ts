@@ -17,6 +17,7 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   devIndicators: false,
+  serverExternalPackages: ['xlsx', 'pdf-parse', 'mammoth'],
   async headers() {
     return [
       {
