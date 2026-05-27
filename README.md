@@ -29,6 +29,7 @@ Open [http://localhost:3000](http://localhost:3000)  to view the prototype.
 
 ## In Progress Features
 - **Authentication with MFA** — Had little to no permission with company's API, which needs approval formally with managers and organization.
+- **Email Setup**- For prototype version, email setup for authentication will be used for sampling.
 ---
 
 ## Getting Started
