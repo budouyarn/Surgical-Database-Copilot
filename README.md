@@ -1,9 +1,10 @@
 Surgical Database + Co-pilot
 A vibecoding project App for operating theatre staff to manage surgeon procedure preference cards and get AI-powered assistance via a built-in co-pilot.
 
-## INTRODUCTORY DECK
-
-Do check out the introductory deck below to understand more about the problem statement leading up to this project!
+## INTRODUCTORY DECK  
+  
+Do check out the introductory deck below to understand more about the problem statement leading up to this project!  
+  
 [Surgical Database Copilot Intro deck](https://www.figma.com/deck/skTBhxZuI5EvQVgkttVv5Y/IHH-Hackathon-%22AI-agents-in-Action%22?node-id=1-44&t=52Axvy14tsLIKHxm-1)
 ---
 
