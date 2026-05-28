@@ -1,22 +1,6 @@
 Surgical Database + Co-pilot
 A vibecoding project App for operating theatre staff to manage surgeon procedure preference cards and get AI-powered assistance via a built-in co-pilot.
 
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-Open [http://localhost:3000](http://localhost:3000)  to view the prototype.
-
 ## Features
 
 - **Surgeon Profiles** — store surgeon details including gown/glove sizes and specialty
@@ -45,10 +29,6 @@ pnpm dev
 # or
 bun dev
 ```
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-Open [http://localhost:3000](http://localhost:3000)  to view the prototype.
-
-
 ## Architecture
 
 The project is split into two apps:
