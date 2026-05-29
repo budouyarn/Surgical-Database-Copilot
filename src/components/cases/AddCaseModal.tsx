@@ -21,6 +21,7 @@ export default function AddCaseModal({ surgeons, procedures, onClose, onSaved }:
     duration_minutes: '',
     status: 'scheduled',
     notes: '',
+    medical_device_support: '',
   });
   const { saving, error, submit } = useFormSubmit('/api/cases', onSaved);
 
@@ -73,6 +74,12 @@ export default function AddCaseModal({ surgeons, procedures, onClose, onSaved }:
         <label className="block text-xs font-medium text-slate-600 mb-1">Patient MRN (optional)</label>
         <input type="text" value={form.patient_mrn} onChange={e => setForm(f => ({ ...f, patient_mrn: e.target.value }))}
           className={inputCls} placeholder="Medical record number" />
+      </div>
+      <div>
+        <label className="block text-xs font-medium text-slate-600 mb-1">Medical Device Support (optional)</label>
+        <input type="text" value={form.medical_device_support}
+          onChange={e => setForm(f => ({ ...f, medical_device_support: e.target.value }))}
+          className={inputCls} placeholder="e.g. Stryker rep – total knee implant system" />
       </div>
       <div>
         <label className="block text-xs font-medium text-slate-600 mb-1">Notes</label>

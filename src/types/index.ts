@@ -42,6 +42,7 @@ export interface OperationCase {
   duration_minutes?: number;
   status: 'scheduled' | 'in_progress' | 'completed' | 'cancelled';
   notes: string;
+  medical_device_support?: string;
   created_at: string;
   surgeon?: Surgeon;
   procedure?: Procedure;

@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Plus, Calendar, Clock } from 'lucide-react';
+import { Plus, Calendar, Clock, Cpu } from 'lucide-react';
 import { OperationCase, Surgeon, Procedure } from '@/types';
 import { fetchList } from '@/lib/fetchList';
 import AddCaseModal from '@/components/cases/AddCaseModal';
@@ -109,6 +109,12 @@ export default function CasesPage() {
                 )}
                 {c.patient_mrn && <span>MRN: {c.patient_mrn}</span>}
               </div>
+              {c.medical_device_support && (
+                <p className="flex items-center gap-1.5 mt-2 text-sm text-slate-600">
+                  <Cpu className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                  {c.medical_device_support}
+                </p>
+              )}
               {c.notes && <p className="mt-2 text-sm text-slate-600">{c.notes}</p>}
             </div>
           ))}
