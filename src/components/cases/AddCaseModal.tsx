@@ -25,12 +25,14 @@ function nowLocalDatetimeValue() {
 export default function AddCaseModal({ surgeons, procedures, onClose, onSaved, initialCase }: Props) {
   const editing = !!initialCase;
 
+  const initialMins = initialCase?.duration_minutes ?? 0;
   const [form, setForm] = useState({
     surgeon_id: initialCase?.surgeon_id ?? '',
     procedure_id: initialCase?.procedure_id ?? '',
     patient_mrn: initialCase?.patient_mrn ?? '',
     date: initialCase ? toLocalDatetimeValue(initialCase.date) : nowLocalDatetimeValue(),
-    duration_minutes: initialCase?.duration_minutes?.toString() ?? '',
+    duration_hours: initialCase ? Math.floor(initialMins / 60).toString() : '',
+    duration_mins: initialCase ? (initialMins % 60).toString() : '',
     status: initialCase?.status ?? 'scheduled',
     notes: initialCase?.notes ?? '',
     medical_device_support: initialCase?.medical_device_support ?? '',
@@ -42,9 +44,18 @@ export default function AddCaseModal({ surgeons, procedures, onClose, onSaved, i
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    const hours = parseInt(form.duration_hours) || 0;
+    const mins = parseInt(form.duration_mins) || 0;
+    const totalMinutes = hours * 60 + mins || null;
     submit({
-      ...form,
-      duration_minutes: form.duration_minutes ? parseInt(form.duration_minutes) : null,
+      surgeon_id: form.surgeon_id,
+      procedure_id: form.procedure_id,
+      patient_mrn: form.patient_mrn,
+      date: form.date,
+      duration_minutes: totalMinutes,
+      status: form.status,
+      notes: form.notes,
+      medical_device_support: form.medical_device_support,
     });
   }
 
@@ -81,10 +92,21 @@ export default function AddCaseModal({ surgeons, procedures, onClose, onSaved, i
           </select>
         </div>
         <div>
-          <label className="block text-xs font-medium text-slate-600 mb-1">Duration (min)</label>
-          <input type="number" value={form.duration_minutes}
-            onChange={e => setForm(f => ({ ...f, duration_minutes: e.target.value }))}
-            className={inputCls} placeholder="e.g. 120" />
+          <label className="block text-xs font-medium text-slate-600 mb-1">Duration</label>
+          <div className="flex gap-2">
+            <div className="relative flex-1">
+              <input type="number" min="0" value={form.duration_hours}
+                onChange={e => setForm(f => ({ ...f, duration_hours: e.target.value }))}
+                className={inputCls} placeholder="0" />
+              <span className="absolute right-2 top-1/2 -translate-y-1/2 text-xs text-slate-400 pointer-events-none">hr</span>
+            </div>
+            <div className="relative flex-1">
+              <input type="number" min="0" max="59" value={form.duration_mins}
+                onChange={e => setForm(f => ({ ...f, duration_mins: e.target.value }))}
+                className={inputCls} placeholder="0" />
+              <span className="absolute right-2 top-1/2 -translate-y-1/2 text-xs text-slate-400 pointer-events-none">min</span>
+            </div>
+          </div>
         </div>
       </div>
       <div>

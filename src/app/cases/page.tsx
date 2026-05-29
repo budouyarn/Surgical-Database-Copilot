@@ -135,7 +135,9 @@ export default function CasesPage() {
                 {c.duration_minutes && (
                   <span className="flex items-center gap-1">
                     <Clock className="w-3.5 h-3.5" />
-                    {c.duration_minutes} min
+                    {c.duration_minutes >= 60
+                      ? `${Math.floor(c.duration_minutes / 60)}h ${c.duration_minutes % 60 > 0 ? `${c.duration_minutes % 60}m` : ''}`.trim()
+                      : `${c.duration_minutes}m`}
                   </span>
                 )}
                 {c.patient_mrn && <span>MRN: {c.patient_mrn}</span>}
