@@ -95,16 +95,20 @@ export default function AddCaseModal({ surgeons, procedures, onClose, onSaved, i
           <label className="block text-xs font-medium text-slate-600 mb-1">Duration</label>
           <div className="flex gap-2">
             <div className="relative flex-1">
+              {!form.duration_hours && (
+                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-slate-400 pointer-events-none">hrs</span>
+              )}
               <input type="number" min="0" value={form.duration_hours}
                 onChange={e => setForm(f => ({ ...f, duration_hours: e.target.value }))}
-                className={inputCls} placeholder="0" />
-              <span className="absolute right-2 top-1/2 -translate-y-1/2 text-xs text-slate-400 pointer-events-none">hr</span>
+                className={inputCls} />
             </div>
             <div className="relative flex-1">
+              {!form.duration_mins && (
+                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-slate-400 pointer-events-none">mins</span>
+              )}
               <input type="number" min="0" max="59" value={form.duration_mins}
                 onChange={e => setForm(f => ({ ...f, duration_mins: e.target.value }))}
-                className={inputCls} placeholder="0" />
-              <span className="absolute right-2 top-1/2 -translate-y-1/2 text-xs text-slate-400 pointer-events-none">min</span>
+                className={inputCls} />
             </div>
           </div>
         </div>
