@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Plus, Calendar, Clock, Cpu } from 'lucide-react';
+import { Plus, Calendar, Clock, Cpu, Edit2 } from 'lucide-react';
 import { OperationCase, Surgeon, Procedure } from '@/types';
 import { fetchList } from '@/lib/fetchList';
 import AddCaseModal from '@/components/cases/AddCaseModal';
@@ -19,6 +19,7 @@ export default function CasesPage() {
   const [procedures, setProcedures] = useState<Procedure[]>([]);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
+  const [editingCase, setEditingCase] = useState<OperationCase | null>(null);
   const [filterSurgeon, setFilterSurgeon] = useState('');
   const [filterStatus, setFilterStatus] = useState('');
 
@@ -92,14 +93,22 @@ export default function CasesPage() {
                   <p className="font-semibold text-slate-800">{c.procedure?.name || 'Unknown Procedure'}</p>
                   <p className="text-sm text-slate-500">{c.surgeon?.name} · {c.surgeon?.specialty}</p>
                 </div>
-                <span className={`text-xs font-medium px-2.5 py-1 rounded-full border ${statusColors[c.status]}`}>
-                  {c.status.replace('_', ' ')}
-                </span>
+                <div className="flex items-center gap-2">
+                  <span className={`text-xs font-medium px-2.5 py-1 rounded-full border ${statusColors[c.status]}`}>
+                    {c.status.replace('_', ' ')}
+                  </span>
+                  <button
+                    onClick={() => setEditingCase(c)}
+                    className="p-1.5 rounded-md text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors"
+                  >
+                    <Edit2 className="w-3.5 h-3.5" />
+                  </button>
+                </div>
               </div>
               <div className="flex items-center gap-4 mt-3 text-sm text-slate-500">
                 <span className="flex items-center gap-1">
                   <Calendar className="w-3.5 h-3.5" />
-                  {new Date(c.date).toLocaleDateString()}
+                  {new Date(c.date).toLocaleDateString()} {new Date(c.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                 </span>
                 {c.duration_minutes && (
                   <span className="flex items-center gap-1">
@@ -127,6 +136,15 @@ export default function CasesPage() {
           procedures={procedures}
           onClose={() => setShowModal(false)}
           onSaved={() => { setShowModal(false); fetchData(); }}
+        />
+      )}
+      {editingCase && (
+        <AddCaseModal
+          surgeons={surgeons}
+          procedures={procedures}
+          initialCase={editingCase}
+          onClose={() => setEditingCase(null)}
+          onSaved={() => { setEditingCase(null); fetchData(); }}
         />
       )}
     </div>

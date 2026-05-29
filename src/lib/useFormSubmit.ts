@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-export function useFormSubmit(url: string, onSaved: () => void) {
+export function useFormSubmit(url: string, onSaved: () => void, method: string = 'POST') {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
 
@@ -10,7 +10,7 @@ export function useFormSubmit(url: string, onSaved: () => void) {
     setSaving(true);
     setError('');
     const res = await fetch(url, {
-      method: 'POST',
+      method,
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
     });
